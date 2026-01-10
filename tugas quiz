@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main()
+{
+    int kekeruhan[]  = {6,8,12,18,24,30,36,42,49};
+    int kecepatan[]  = {1000,1200,1400,1500,1600,1700,1800,1900,2000};
+    int waktuMenit[] = {6,8,12,18,24,30,36,42,49};
+
+    int pilihan, i, index = -1;
+
+    printf("Level Kekeruhan:\n");
+
+    for(i = 0; i < 9; i++)
+        printf("%d NTU\n", kekeruhan[i]);
+
+    printf("\nMasukkan Level Kekeruhan: ");
+    scanf("%d", &pilihan);
+
+    // Validasi input
+    for(i = 0; i < 9; i++)
+    {
+        if(pilihan == kekeruhan[i])
+        {
+            index = i;
+            break;
+        }
+    }
+
+    if(index == -1)
+    {
+        printf("Level kekeruhan tidak valid!\n");
+        return 0;
+    }
+
+    int rpm = kecepatan[index];
+    int waktuDetik = waktuMenit[index];   // menit ? detik
+    int setengah = waktuDetik / 2;
+
+    printf("\nTombol START ditekan\n");
+
+    // 1. Isi air (2 detik)
+    printf("Mengisi air...\n");
+    sleep(2);
+
+    // 2. Sensor aktif (1 kali)
+    printf("Sensor mendeteksi kekeruhan: %d NTU\n", pilihan);
+
+    // 3. Motor utama setengah waktu
+    printf("Mencuci (RPM %d)...\n", rpm);
+    sleep(setengah);
+
+    // 4. Stop motor
+    printf("Motor berhenti (pertengahan waktu)\n");
+
+    // 5. Buang air kotor (2 detik)
+    printf("Membuang air kotor...\n");
+    sleep(2);
+
+    // 6. Pengeringan
+    printf("Pengeringan (2000 RPM)...\n");
+    sleep(3);
+
+    // 7. Isi air lagi
+    printf("Mengisi air kembali...\n");
+    sleep(2);
+
+    // 8. Sisa waktu mencuci
+    printf("Melanjutkan pencucian...\n");
+    sleep(setengah);
+
+    // 9. Buang air akhir
+    printf("Membuang air akhir...\n");
+    sleep(2);
+
+    // 10. Pengeringan akhir
+    printf("Pengeringan akhir (2000 RPM)...\n");
+    sleep(3);
+
+    return 0;
+}
